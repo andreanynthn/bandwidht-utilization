@@ -39,8 +39,9 @@ interfaces = psutil.net_if_addrs()
 mac = []
 for interface in interfaces.values():
     for link in interface:
-        if link.family == psutil.AF_LINK:
-            mac.append(link.address)
+        mac.append(link.address)
+#         if link.family == psutil.AF_LINK:
+#             mac.append(link.address)
  
 all_macs = set(mac)
 # A dictionary to map each connection to its correponding process ID (PID)
