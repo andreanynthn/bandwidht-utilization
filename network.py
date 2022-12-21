@@ -35,7 +35,14 @@ else:
 # get the all network adapter's MAC addresses
 # all_macs = {iface.mac for iface in ifaces.values()}
 interfaces = psutil.net_if_addrs()
-all_macs = {iface.address for iface in interfaces["eth0"] if iface.family == psutil.AF_LINK}
+
+mac = []
+for interface in interfaces.values():
+    for link in interface:
+        if link.family == psutil.AF_LINK:
+            mac.append(link.address)
+ 
+all_macs = set(mac)
 # A dictionary to map each connection to its correponding process ID (PID)
 connection2pid = {}
 # A dictionary to map each process ID (PID) to total Upload (0) and Download (1) traffic
